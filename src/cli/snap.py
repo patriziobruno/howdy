@@ -12,7 +12,7 @@ path = os.path.abspath(__file__ + "/..")
 
 # Read the config
 config = configparser.ConfigParser()
-config.read(path + "/../config.ini")
+config.read("/etc/howdy/config.ini")
 
 # Start video capture
 video_capture = VideoCapture(config)

@@ -1,11 +1,11 @@
 %global 	with_snapshot 0
-%global 	date 20181109.
-%global		commit b4ecafe61c83a4aaab56a52a713296143c87b576
+%global 	date 20210407.
+%global		commit 95331bd83a97fc35a5bf7222bfa2aa076fb1b22c
 %global		shortcommit %(c=%{commit}; echo ${c:0:7})
 %global		debug_package %{nil}	
 
 Name:           howdy
-Version:        2.5.1
+Version:        2.6.1
 %if %{with_snapshot}
 Release:	0.1.git.%{date}%{shortcommit}%{?dist}
 %else
@@ -45,9 +45,11 @@ pathfix.py -i %{__python3} .
 
 %install
 mkdir -p %{buildroot}%{_libdir}/security/%{name}
+mkdir -p %{buildroot}/etc/%{name}
 # Remove backup file
 rm -fr src/*~
 cp -pr src/* %{buildroot}%{_libdir}/security/%{name}
+cp -pr src/config.ini %{buildroot}/etc/%{name}
 
 # Install facial recognition, may look at better alternative
 # for offline user
@@ -76,7 +78,7 @@ ln -s %{_libdir}/security/%{name}/cli.py %{buildroot}%{_bindir}/%{name}
 %{_datadir}/bash-completion/completions/%{name}
 %{_datadir}/polkit-1/actions/
 %{_libdir}/security/%{name}
-%config(noreplace) %{_libdir}/security/%{name}/config.ini
+%config(noreplace) /etc/%{name}/config.ini
 
 %changelog
 * Sun Apr 07 2019 Luya Tshimbalanga <luya@fedoraproject.org> - 2.5.1-3

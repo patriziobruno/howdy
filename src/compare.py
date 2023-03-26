@@ -67,7 +67,7 @@ if len(sys.argv) < 2:
 	sys.exit(12)
 
 # Get the absolute path to the current directory
-PATH = os.path.abspath(__file__ + "/..")
+PATH = "/etc/howdy"
 
 # The username of the user being authenticated
 user = sys.argv[1]

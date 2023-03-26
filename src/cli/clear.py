@@ -11,12 +11,12 @@ path = os.path.dirname(os.path.abspath(__file__))
 user = builtins.howdy_user
 
 # Check if the models folder is there
-if not os.path.exists(path + "/../models"):
+if not os.path.exists("/etc/howdy/models"):
 	print("No models created yet, can't clear them if they don't exist")
 	sys.exit(1)
 
 # Check if the user has a models file to delete
-if not os.path.isfile(path + "/../models/" + user + ".dat"):
+if not os.path.isfile("/etc/howdy/models/" + user + ".dat"):
 	print(user + " has no models or they have been cleared already")
 	sys.exit(1)
 
@@ -32,5 +32,5 @@ if not builtins.howdy_args.y:
 		sys.exit(1)
 
 # Delete otherwise
-os.remove(path + "/../models/" + user + ".dat")
+os.remove("/etc/howdy/models/" + user + ".dat")
 print("\nModels cleared")

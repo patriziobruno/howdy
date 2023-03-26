@@ -18,13 +18,13 @@ if builtins.howdy_args.argument is None:
 	sys.exit(1)
 
 # Check if the models file has been created yet
-if not os.path.exists(path + "/models"):
+if not os.path.exists("/etc/howdy/models"):
 	print("Face models have not been initialized yet, please run:")
 	print("\n\thowdy add\n")
 	sys.exit(1)
 
 # Path to the models file
-enc_file = path + "/models/" + user + ".dat"
+enc_file = "/etc/howdy/models/" + user + ".dat"
 
 # Try to load the models file and abort if the user does not have it yet
 try:
@@ -65,7 +65,7 @@ if not found:
 
 # Remove the entire file if this encoding is the only one
 if len(encodings) == 1:
-	os.remove(path + "/models/" + user + ".dat")
+	os.remove("/etc/howdy/models/" + user + ".dat")
 	print("Removed last model, howdy disabled for user")
 else:
 	# A place holder to contain the encodings that will remain

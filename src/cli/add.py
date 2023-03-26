@@ -26,6 +26,8 @@ import cv2
 
 # Get the absolute path to the current directory
 path = os.path.abspath(__file__ + "/..")
+conf_path = "/etc/howdy"
+models_path = conf_path + "/models"
 
 # Test if at lest 1 of the data files is there and abort if it's not
 if not os.path.isfile(path + "/../dlib-data/shape_predictor_5_face_landmarks.dat"):
@@ -36,7 +38,7 @@ if not os.path.isfile(path + "/../dlib-data/shape_predictor_5_face_landmarks.dat
 
 # Read config from disk
 config = configparser.ConfigParser()
-config.read(path + "/../config.ini")
+config.read(conf_path + "/config.ini")
 
 use_cnn = config.getboolean("core", "use_cnn", fallback=False)
 if use_cnn:
@@ -49,14 +51,14 @@ face_encoder = dlib.face_recognition_model_v1(path + "/../dlib-data/dlib_face_re
 
 user = builtins.howdy_user
 # The permanent file to store the encoded model in
-enc_file = path + "/../models/" + user + ".dat"
+enc_file = models_path + "/" + user + ".dat"
 # Known encodings
 encodings = []
 
 # Make the ./models folder if it doesn't already exist
-if not os.path.exists(path + "/../models"):
+if not os.path.exists(models_path):
 	print("No face model folder found, creating one")
-	os.makedirs(path + "/../models")
+	os.makedirs(models_path)
 
 # To try read a premade encodings file if it exists
 try:
